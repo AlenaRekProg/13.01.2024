@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: JSONPlaceholder API Documentation
+  version: 1.0.0
+paths:
+  /posts:
+    get:
+      summary: Get all posts
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: [...list of posts...]
+        '404':
+          description: Not Found
+    post:
+      summary: Create a new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example: { "title": "foo", "body": "bar", "userId": 1 }
+      responses:
+        '201':
+          description: Resource created
+          content:
+            application/json:
+              example: { "id": 101, "title": "foo", "body": "bar", "userId": 1 }
+        '404':
+          description: Not Found
+
+  /posts/{postId}:
+    parameters:
+      - name: postId
+        in: path
+        required: true
+        description: ID of the post
+        schema:
+          type: integer
+    get:
+      summary: Get a specific post by ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { "id": 1, "title": "delectus aut autem", "completed": false, "userId": 1 }
+        '404':
+          description: Not Found
+    put:
+      summary: Update a specific post by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example: { "id": 1, "title": "foo", "body": "bar", "userId": 1 }
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { "id": 1, "title": "foo", "body": "bar", "userId": 1 }
+        '404':
+          description: Not Found
+    patch:
+      summary: Partially update a specific post by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example: { "title": "foo" }
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { "id": 1, "title": "foo", "body": "...", "userId": 1 }
+        '404':
+          description: Not Found
+    delete:
+      summary: Delete a specific post by ID
+      responses:
+        '200':
+          description: Resource deleted
+        '404':
+          description: Not Found
+
+  /comments:
+    get:
+      summary: Get all comments
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: [...list of comments...]
+        '404':
+          description: Not Found
+
+  /comments/{commentId}:
+    parameters:
+      - name: commentId
+        in: path
+        required: true
+        description: ID of the comment
+        schema:
+          type: integer
+    get:
+      summary: Get a specific comment by ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { "id": 1, "postId": 1, "name": "John Doe", "email": "john.doe@example.com", "body": "Great post!" }
+        '404':
+          description: Not Found
